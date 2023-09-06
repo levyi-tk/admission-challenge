@@ -32,7 +32,9 @@ sshpass -p vagrant ssh-copy-id -o "StrictHostKeyChecking=no"  -i  /home/vagrant/
 
 
 echo "+++++++++>>>>>Exacuting script sshing.sh in server1(192.168.60.10)"
-ssh -vvv -tt -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa vagrant@192.168.60.10 '/usr/bin/bash /home/vagrant/sshing.sh'
+#ssh -vvv -tt -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa vagrant@192.168.60.10 '/usr/bin/bash /home/vagrant/sshing.sh'
+ssh -vvv -tt -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa vagrant@192.168.60.10 \
+                'sshpass -p vagrant ssh-copy-id -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa.pub vagrant@192.168.60.11'
 #ssh -vvv -tt -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa vagrant@192.168.60.10 '/usr/bin/bash /home/vagrant/sshing1.sh'
 sudo sed -i '$a\    StrictHostKeyChecking no' /etc/ssh/ssh_config
 
