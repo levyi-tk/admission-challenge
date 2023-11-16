@@ -2,7 +2,7 @@
 #add fix to exercise5-server2 here
 
 
-sudo sed -i '$a\192.168.60.10	 server1 server1' /etc/hosts
+#sudo sed -i '$a\192.168.60.10	 server1 server1' /etc/hosts
 
 # changing PasswordAuthentication value to 'yes'
 sudo sed -i "s:PasswordAuthentication no:PasswordAuthentication yes :g" \

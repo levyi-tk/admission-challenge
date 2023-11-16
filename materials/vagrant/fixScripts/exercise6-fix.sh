@@ -15,24 +15,24 @@ USR=`whoami`
 for ((i = 1; i < $#; i++)); do
     file="${!i}"
     # Check if the file exists
-    if [ ! -f "$file" ]; then
-        echo "File not found: $file"
+    if [ ! -f "$file" ] && [ ! -d "$file" ]; then
+        echo "File/Directory not found: $file"
         exit 1
     fi
     # Check host
     if [ "$HOSTNAME" == "server1" ]; then
       if [ "$USR" == "root" ]; then
-         scp -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa $file vagrant@server2:$destination_folder 2>/dev/null
+         scp -r -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa $file vagrant@server2:$destination_folder 2>/dev/null
        else
          # Copy the file to the destination folder
-        scp -o "StrictHostKeyChecking=no" $file vagrant@server2:$destination_folder  2>/dev/null
+        scp -r -o "StrictHostKeyChecking=no" $file vagrant@server2:$destination_folder  2>/dev/null
       fi
     else
       if [ "$USR" == "root" ]; then
-         scp -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa $file vagrant@server1:$destination_folder 2>/dev/null
+         scp -r -o "StrictHostKeyChecking=no" -i /home/vagrant/.ssh/id_rsa $file vagrant@server1:$destination_folder 2>/dev/null
        else
          # Copy the file to the destination folder
-        scp -o "StrictHostKeyChecking=no" $file vagrant@server1:$destination_folder 2>/dev/null
+        scp -r -o "StrictHostKeyChecking=no" $file vagrant@server1:$destination_folder 2>/dev/null
       fi
     fi
 
